@@ -1,0 +1,2 @@
+# TODO: This should graph a plane of all of the datapoints, and graph the fitted polynomial on the same graph
+# It should also have a graph of the error, and they shouldn't extrapolate, only predict and compare the actual datapoints.

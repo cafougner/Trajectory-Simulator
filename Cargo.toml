@@ -1,0 +1,17 @@
+[package]
+name = "trajectory_solver"
+version = "0.1.0"
+edition = "2021"
+
+# See https://doc.rust-lang.org/cargo/reference/profiles.html
+[profile.release]
+strip = "symbols"
+lto = true
+panic = "abort"
+codegen-units = 1
+
+[profile.release.package."*"]
+inherits = "release"
+
+[profile.release.build-override]
+inherits = "release"
