@@ -30,3 +30,11 @@ pub mod physics_constants {
     pub const SOLVER_TIMESTEP: f64 = 1e-5; // The amount of time the solver steps through for every iteration, in s.
     pub const SOLVER_LIMIT: u64 = 64; // The limit for the solver to find a solution before the simulation is considered impossible.
 }
+
+pub mod progress_bar_constants {
+    pub const PROGRESS_CHAR: &str = "─";
+    pub const PROGRESS_LENGTH: u64 = 50;
+
+    pub const COMPLETE_COLOR: &str = "\x1b[32m"; // Green, Hexadecimal ANSI.
+    pub const INCOMPLETE_COLOR: &str = "\x1b[38;5;235m"; // Dark gray, Hexadecimal ANSI.
+}

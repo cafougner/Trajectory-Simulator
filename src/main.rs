@@ -1,4 +1,4 @@
-use constants::fitting_constants::*;
+use constants::{fitting_constants::*, progress_bar_constants::*};
 use integrators::euler::integrate;
 use math_helpers::MathHelpers;
 use solvers::bisection::solve;
@@ -70,21 +70,35 @@ fn simulate_single_cpu() -> Vec<(f64, f64, f64)> {
                 incompleteable += 1;
             }
 
-            let progress: f64 = (i * VELOCITY_STEPS + j + 1) as f64 / TOTAL_STEPS as f64 * 100.0;
+            let progress_percent: f64 =
+                (i * VELOCITY_STEPS + j + 1) as f64 / TOTAL_STEPS as f64 * 100.0;
 
-            // This overwrites the previous message with the new one.
+            // I'm not sure if using .floor() will cause any issues (it stops the progress bar from completing early),
+            // but if there is any problems with it not finishing, it is probably because of this.
+            let progress_integer: u64 = (progress_percent / 2.0).floor() as u64;
+
+            let progress_complete: String = PROGRESS_CHAR.repeat(progress_integer as usize);
+            let progress_incomplete: String =
+                PROGRESS_CHAR.repeat(PROGRESS_LENGTH.saturating_sub(progress_integer) as usize);
+
+            // \r goes to the start of the line, \x1b[2K clears it, \x1b[0m sets the color back to the default, and \x1b[?25l hides the cursor.
             print!(
-                "\r  Time: {:.4?}, Progress: {:.2}%    \r",
+                "\r\x1b[2K{}{}{}{}\x1b[0m {:.4?} | {:.2}%\x1b[?25l",
+                COMPLETE_COLOR,
+                progress_complete,
+                INCOMPLETE_COLOR,
+                progress_incomplete,
                 start.elapsed(),
-                progress
+                progress_percent
             );
 
             stdout().flush().unwrap();
         }
     }
 
+    // \n goes to a new line and \x1b[?25h shows the cursor.
     println!(
-        "\nSingle-threaded CPU simulation finished with {} incompleteable simulations.",
+        "\nSingle-threaded CPU simulation finished with {} incompleteable simulations.\x1b[?25h",
         incompleteable
     );
 
