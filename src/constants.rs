@@ -32,7 +32,7 @@ pub mod physics_constants {
 }
 
 pub mod progress_bar_constants {
-    pub const PROGRESS_CHAR: &str = "─";
+    pub const PROGRESS_CHARACTER: &str = "━";
     pub const PROGRESS_LENGTH: u64 = 50;
 
     pub const COMPLETE_COLOR: &str = "\x1b[32m"; // Green, Hexadecimal ANSI.

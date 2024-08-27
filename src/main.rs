@@ -70,16 +70,14 @@ fn simulate_single_cpu() -> Vec<(f64, f64, f64)> {
                 incompleteable += 1;
             }
 
-            let progress_percent: f64 =
-                (i * VELOCITY_STEPS + j + 1) as f64 / TOTAL_STEPS as f64 * 100.0;
+            let progress_factor: f64 = (i * VELOCITY_STEPS + j + 1) as f64 / TOTAL_STEPS as f64;
+            let progress_percent: f64 = progress_factor * 100.0;
 
-            // I'm not sure if using .floor() will cause any issues (it stops the progress bar from completing early),
-            // but if there is any problems with it not finishing, it is probably because of this.
-            let progress_integer: u64 = (progress_percent / 2.0).floor() as u64;
+            let progress_complete: String = PROGRESS_CHARACTER
+                .repeat((PROGRESS_LENGTH as f64 * progress_factor).floor() as usize);
 
-            let progress_complete: String = PROGRESS_CHAR.repeat(progress_integer as usize);
-            let progress_incomplete: String =
-                PROGRESS_CHAR.repeat(PROGRESS_LENGTH.saturating_sub(progress_integer) as usize);
+            let progress_incomplete: String = PROGRESS_CHARACTER
+                .repeat((PROGRESS_LENGTH as f64 * (1.0 - progress_factor)).ceil() as usize);
 
             // \r goes to the start of the line, \x1b[2K clears it, \x1b[0m sets the color back to the default, and \x1b[?25l hides the cursor.
             print!(
