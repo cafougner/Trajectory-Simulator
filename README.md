@@ -4,7 +4,7 @@
 ## Install
 To use the program, you need to have both [Rust](https://www.rust-lag.org/tools/install) (1.80.1 as of writing) and [Python](https://www.python.org/downloads/) (3.12.5 as of writing) installed.
 
-You can install the Python dependencies (numpy, pandas, and scikit-learn) by running
+You can install the Python dependencies (matplotlib, numpy, pandas, scikit-learn, and scipy) by running
 
 ```sh
 $ python3 -m pip install -r requirements.txt
@@ -25,6 +25,11 @@ $ python3 -m results_equation_generator.py
 
 which will output an `equation.txt` file to the `results` folder, containing the polynomial equation, along with its degree and max/mean errors.
 
+If you want more detailed information, you can compare the real data to the polynomial predictions, as well as graph the polynomials error, by running
+```sh
+$ python3 -m results_analyzer.py
+```
+
 ## Configuration
 ### Simulation Configuration
 To configure the physics and simulation parameters, you can modify the [`constants.rs`](./src/constants.rs) file.
@@ -39,8 +44,6 @@ To configure the parameters for the generated polynomial, you can modify either 
 * Improve integration error and stopping conditions (see the [`euler.rs`](./src/integrators/euler.rs) TODO comment).
 
 * Support obstacles / indirect trajectories (see the [`euler.rs`](./src/integrators/euler.rs) TODO comment).
-
-* Finish the [`results_analyzer.py`](./results_analyzer.py) script.
 
 * Implement multithreaded CPU and GPU simulations.
 
