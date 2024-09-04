@@ -1,6 +1,6 @@
 [package]
-name = "trajectory_solver"
-version = "0.1.0"
+name = "trajectory_simulator"
+version = "0.2.0"
 edition = "2021"
 
 # See https://doc.rust-lang.org/cargo/reference/profiles.html
