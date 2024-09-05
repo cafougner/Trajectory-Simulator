@@ -1,6 +1,5 @@
 use super::physics_helpers::{calculate_drag_factors, calculate_initial_velocities};
 use crate::constants::physics_constants::{GRAVITY, SOLVER_TIMESTEP};
-use std::arch::asm;
 
 // TODO: The stopping conditions need to be fixed.
 // For example, both 0 and 90 degrees will always have the same error (y2) because they both hit the ground at x = 0.0.
@@ -8,7 +7,7 @@ use std::arch::asm;
 //
 // Currently, indirect trajectories also do not work. There also needs to be a way to add polygons into the simulation that the projectile has to go around.
 
-#[cfg(not(target_feature = "fma"))]
+#[cfg(not(all(target_arch = "x86_64", target_feature = "fma")))]
 /// An unoptimized/reference implementation of Euler integration.
 fn euler_integration(angle: f64, velocity: f64, mut x1: f64, mut y1: f64, x2: f64, y2: f64) -> f64 {
     let (mut x_velocity, mut y_velocity) = calculate_initial_velocities(angle, velocity);
@@ -28,12 +27,14 @@ fn euler_integration(angle: f64, velocity: f64, mut x1: f64, mut y1: f64, x2: f6
     y1 - y2
 }
 
-#[cfg(target_feature = "fma")]
+#[cfg(all(target_arch = "x86_64", target_feature = "fma"))]
 /// An optimized implementation of Euler integration with FMA instructions.
 /// This is really unnecessary, but I did it because I can, and it is faster.
 ///
 /// See [the FMA instruction set](https://en.wikipedia.org/wiki/FMA_instruction_set).
 fn euler_integration(angle: f64, velocity: f64, mut x1: f64, mut y1: f64, x2: f64, y2: f64) -> f64 {
+    use std::arch::asm;
+
     let (mut x_velocity, mut y_velocity) = calculate_initial_velocities(angle, velocity);
     let (x_drag_factor, y_drag_factor) = calculate_drag_factors(angle);
 
