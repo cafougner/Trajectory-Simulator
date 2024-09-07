@@ -16,7 +16,7 @@ pub fn solve(
 
     let mut a_error: f64 = integrate(a, velocity, x1, y1, x2, y2);
     let mut b_error: f64 = integrate(b, velocity, x1, y1, x2, y2);
-    let mut iterations: u64 = 0;
+    let mut iterations: u8 = 0;
 
     while (a_error.abs() > SOLVER_TOLERANCE)
         && (b_error.abs() > SOLVER_TOLERANCE)
@@ -25,7 +25,7 @@ pub fn solve(
         let c: f64 = (a + b) / 2.0;
         let c_error: f64 = integrate(c, velocity, x1, y1, x2, y2);
 
-        // Since c is the midpoint of a and b, if a and c are on the same side of the root, the range is reduced to b-c.
+        // Since c is the midpoint of a and b, if a and c are on different sides of the root, the range is reduced to a-c, and vice versa.
         if a_error.signum() != c_error.signum() {
             b = c;
             b_error = c_error;

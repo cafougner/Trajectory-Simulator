@@ -10,7 +10,7 @@ from sklearn.preprocessing import PolynomialFeatures
 gridResolution = 500j
 
 # These need to be changed in the results_analyzer.py and the constants.rs as well.
-polynomialDegree = 8
+polynomialDegree = 9
 
 resultsFolder = "results"
 resultsFile = "results.csv"

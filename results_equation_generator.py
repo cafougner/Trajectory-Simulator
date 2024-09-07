@@ -12,7 +12,7 @@ x0 = "d_i_s_t_a_n_c_e"
 x1 = "v_e_l_o_c_i_t_y"
 
 # These need to be changed in the results_analyzer.py and the constants.rs as well.
-polynomialDegree = 8
+polynomialDegree = 9
 
 resultsFolder = "results"
 resultsFile = "results.csv"
@@ -38,10 +38,12 @@ polynomialIntercept = from_scientific(model.intercept_)
 
 maxError = np.max(np.abs(errors))
 meanError = np.mean(np.abs(errors))
+medianError = np.median(np.abs(errors))
 
 polynomialEquation = " + ".join(f"{coef}*{feature}" for coef, feature in zip(polynomialCoeffs, polynomialFeatures))
 
 with open(os.path.join(resultsFolder, equationFile), "w", encoding = "utf-8") as f:
-    f.write(f"Polynomial degree {polynomialDegree}\n\nErrors (°):\nMax: {maxError}\nMean: {meanError}\n\ny = {polynomialIntercept} + {polynomialEquation}")
+    f.write(f"Max error: {maxError} degrees\nMean error: {meanError} degrees\nMedian error: {medianError} degrees\n\nPolynomial degree: {polynomialDegree}\nPolynomial equation: y = {polynomialIntercept} + {polynomialEquation}")
 
+print(f"Max error: {maxError} degrees, Mean error: {meanError} degrees.")
 print(f"Equation generated and written to {equationFile} in the {resultsFolder} folder.")

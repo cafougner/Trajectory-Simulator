@@ -60,6 +60,10 @@ fn simulate_single_cpu() -> Vec<(f64, f64, f64)> {
         let distance: f64 =
             ((DISTANCE_STEP * i as f64) + DISTANCE_MIN).round_nearest(DISTANCE_STEP);
 
+        // TODO: This can be optimized by starting at the highest velocities for the lowest distances,
+        // and skipping that distance once the velocity can't complete the simulation (slowing it down
+        // wont make it go further). We can also do this with the distances, but from smallest to largest,
+        // and when the highest velocity can't find a solution for a distance, the simulation can stop early.
         for j in 0..VELOCITY_STEPS {
             let velocity: f64 =
                 ((VELOCITY_STEP * j as f64) + VELOCITY_MIN).round_nearest(VELOCITY_STEP);
