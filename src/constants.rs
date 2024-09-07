@@ -26,8 +26,11 @@ pub mod physics_constants {
     pub const X_DRAG_COEFFICIENT: f64 = 1.875; // The arbitrary drag coefficient for the horizontal facing cross section.
     pub const Y_DRAG_COEFFICIENT: f64 = 2.5; // The arbitrary drag coefficient for the vertical facing cross section.
 
+    pub const PHYSICS_TIMESTEP: f64 = 2e-5; // The amount of time the physics steps through for each iteration, in s.
+}
+
+pub mod solver_constants {
     pub const SOLVER_TOLERANCE: f64 = 1e-4; // The +- tolerance for error for the solver, in m.
-    pub const SOLVER_TIMESTEP: f64 = 1e-5; // The amount of time the solver steps through for every iteration, in s.
     pub const SOLVER_LIMIT: u64 = 64; // The limit for the solver to find a solution before the simulation is considered impossible.
 }
 

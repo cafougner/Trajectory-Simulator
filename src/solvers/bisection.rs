@@ -1,4 +1,4 @@
-use crate::constants::physics_constants::{SOLVER_LIMIT, SOLVER_TOLERANCE};
+use crate::constants::solver_constants::{SOLVER_LIMIT, SOLVER_TOLERANCE};
 
 /// A reference implementation of the bisection method to find the angle with the lowest error.
 ///

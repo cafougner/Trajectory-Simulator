@@ -1,5 +1,5 @@
 use constants::{fitting_constants::*, progress_bar_constants::*};
-use integrators::euler::integrate;
+use integrators::leapfrog::integrate;
 use math_helpers::MathHelpers;
 use solvers::bisection::solve;
 
