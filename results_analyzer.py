@@ -10,11 +10,10 @@ from sklearn.preprocessing import PolynomialFeatures
 gridResolution = 500j
 
 # These need to be changed in the results_analyzer.py and the constants.rs as well.
-polynomialDegree = 9
+polynomialDegree = 8
 
 resultsFolder = "results"
 resultsFile = "results.csv"
-equationFile = "equation.txt"
 
 csvData = pd.read_csv(os.path.join(resultsFolder, resultsFile))
 
@@ -46,7 +45,7 @@ distancesGrid, velocitiesGrid = np.mgrid[
 csvRootGrid = griddata((distances, velocities), roots, (distancesGrid, velocitiesGrid))
 csvRootPlane = subplot1.plot_surface(distancesGrid, velocitiesGrid, csvRootGrid, cmap = "coolwarm", alpha = 1.0)
 
-subplot1.set_title("Real Data")
+subplot1.set_title("Simulation Data")
 subplot1.set_xlabel("Distance (m)")
 subplot1.set_ylabel("Velocity (m/s)")
 subplot1.set_zlabel("Angle (°)")
@@ -56,7 +55,7 @@ subplot1.view_init(elev = 25, azim = 60)
 polynomialRootGrid = griddata((distances, velocities), polynomialRoots, (distancesGrid, velocitiesGrid))
 polynomialRootPlane = subplot2.plot_surface(distancesGrid, velocitiesGrid, polynomialRootGrid, cmap = "coolwarm", alpha = 1.0)
 
-subplot2.set_title("Fitted Polynomial")
+subplot2.set_title("Polynomial Predictions")
 subplot2.set_xlabel("Distance (m)")
 subplot2.set_ylabel("Velocity (m/s)")
 subplot2.set_zlabel("Angle (°)")
