@@ -16,7 +16,7 @@ polynomialDegree = 8
 
 resultsFolder = "results"
 resultsFile = "results.csv"
-equationFile = "equation.txt"
+equationFile = "polynomial.txt"
 
 csvData = pd.read_csv(os.path.join(resultsFolder, resultsFile))
 
@@ -38,10 +38,12 @@ polynomialIntercept = from_scientific(model.intercept_)
 
 maxError = np.max(np.abs(errors))
 meanError = np.mean(np.abs(errors))
+medianError = np.median(np.abs(errors))
 
 polynomialEquation = " + ".join(f"{coef}*{feature}" for coef, feature in zip(polynomialCoeffs, polynomialFeatures))
 
 with open(os.path.join(resultsFolder, equationFile), "w", encoding = "utf-8") as f:
-    f.write(f"Polynomial degree {polynomialDegree}\n\nErrors (°):\nMax: {maxError}\nMean: {meanError}\n\ny = {polynomialIntercept} + {polynomialEquation}")
+    f.write(f"Max error: {maxError} degrees\nMean error: {meanError} degrees\nMedian error: {medianError} degrees\n\nPolynomial degree: {polynomialDegree}\nPolynomial equation: y = {polynomialIntercept} + {polynomialEquation}")
 
+print(f"Max error: {maxError} degrees, Mean error: {meanError} degrees.")
 print(f"Equation generated and written to {equationFile} in the {resultsFolder} folder.")

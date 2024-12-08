@@ -1,6 +1,5 @@
 [package]
 name = "trajectory_simulator"
-version = "0.2.0"
 edition = "2021"
 
 # See https://doc.rust-lang.org/cargo/reference/profiles.html
@@ -15,3 +14,13 @@ inherits = "release"
 
 [profile.release.build-override]
 inherits = "release"
+
+[lints.clippy]
+pedantic = {level = "warn", priority = -1}
+
+cast_possible_truncation = "allow"
+cast_sign_loss = "allow"
+doc_markdown = "allow"
+missing_panics_doc = "allow"
+must_use_candidate = "allow"
+wildcard_imports = "allow"
