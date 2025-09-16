@@ -69,7 +69,7 @@ pub fn simulate_single_cpu() -> Vec<(f64, f64, f64)> {
         }
     }
 
-    println!("\nSimulation finished with {incomplete} simulations.\x1b[?25h");
+    println!("\nSimulation finished with {incomplete} incomplete simulations.\x1b[?25h");
     results
 }
 
