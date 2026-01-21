@@ -40,7 +40,7 @@ pub fn simulate_single_cpu() -> Vec<(f64, f64, f64)> {
         for j in 0..VELOCITY_STEPS {
             let velocity: f64 = ((VELOCITY_STEP * f64::from(j)) + VELOCITY_MIN).round_nearest(VELOCITY_STEP);
 
-            if let Some((root, _)) = solve(0.0, 0.0, distance, 2.1, velocity, integrate) {
+            if let Some((root, _)) = solve(0.0, 0.762, distance, 1.8288, velocity, integrate) {
                 results.push((distance, velocity, root));
             }
 

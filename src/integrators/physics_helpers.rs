@@ -34,5 +34,7 @@ pub fn get_drag_factors(angle: f64) -> (f64, f64) {
     let x_drag_factor: f64 = x_drag_coefficient * x_surface_area * DRAG_FACTOR_CONSTANT;
     let y_drag_factor: f64 = y_drag_coefficient * y_surface_area * DRAG_FACTOR_CONSTANT;
 
-    (x_drag_factor, y_drag_factor)
+    // Quick fix that is probably wrong; I noticed that when I increased the drag coefficients, the
+    // time for each projectile to hit the ground decreased, like air resistant was applied opposite.
+    (-x_drag_factor, -y_drag_factor)
 }

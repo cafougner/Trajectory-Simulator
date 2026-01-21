@@ -17,7 +17,7 @@ pub fn solve(
         let c_error: f64 = integrate(c, velocity, x1, y1, x2, y2);
 
         // Since c is the midpoint of a and b, if a and c are on the same side of the root, the range reduces to c-b and vice versa.
-        if a_error.signum() == c_error.signum() {
+        if a_error.is_sign_positive() == c_error.is_sign_positive() {
             a = c;
             a_error = c_error;
         }

@@ -12,7 +12,7 @@ x0 = "d_i_s_t_a_n_c_e"
 x1 = "v_e_l_o_c_i_t_y"
 
 # These need to be changed in the results_analyzer.py and the constants.rs as well.
-polynomialDegree = 8
+polynomialDegree = 5
 
 resultsFolder = "results"
 resultsFile = "results.csv"
