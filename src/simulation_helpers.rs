@@ -2,7 +2,7 @@ use std::{path::Path, time::Instant};
 use std::{fs::{create_dir_all, File}, io::{stdout, BufWriter, Write}};
 
 use crate::constants::simulation::{*, progress_bar::*};
-use crate::integrators::leapfrog::integrate;
+use crate::integrators::euler::integrate;
 use crate::math_helpers::MathHelpers;
 use crate::solvers::bisection::solve;
 

@@ -9,8 +9,8 @@ pub mod physics {
 		pub const X_SURFACE_AREA: f64 = 0.0177; // The surface area of the horizontal facing cross section, m^2.
 		pub const Y_SURFACE_AREA: f64 = 0.0177; // The surface area of the vertical facing cross section, m^2.
 
-		pub const X_DRAG_COEFFICIENT: f64 = 1.534; // The arbitrary drag coefficient of the horizontal facing cross section.
-		pub const Y_DRAG_COEFFICIENT: f64 = 1.534; // The arbitrary drag coefficient of the vertical facing cross section.
+		pub const X_DRAG_COEFFICIENT: f64 = 1.628; // The arbitrary drag coefficient of the horizontal facing cross section.
+		pub const Y_DRAG_COEFFICIENT: f64 = 1.628; // The arbitrary drag coefficient of the vertical facing cross section.
 		pub const DRAG_FACTOR_CONSTANT: f64 = super::AIR_DENSITY / (MASS * 2.0);
 	}
 }
@@ -39,5 +39,6 @@ pub mod simulation {
 
 pub mod solver {
 	pub const TOLERANCE: f64 = 1e-4; // Absolute tolerance for error, m.
+	pub const FINAL_TOLERANCE: f64 = 0.4; // Final tolerance for the solution after solving, m.
 	pub const LIMIT: u32 = 64; // Limit to find a solution before considering the given simulation impossible.
 }

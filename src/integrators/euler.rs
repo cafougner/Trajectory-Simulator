@@ -12,18 +12,36 @@ fn euler(angle: f64, velocity: f64, mut x1: f64, mut y1: f64, x2: f64, y2: f64) 
     let (mut x_velocity, mut y_velocity) = get_initial_velocities(angle, velocity);
     let (x_drag_factor, y_drag_factor) = get_drag_factors(angle);
 
-    while (x1 < x2) && (y1 >= 0.0) {
-        let dx_velocity: f64 = x_velocity.powi(2) * x_drag_factor;
-        let dy_velocity: f64 = GRAVITY + y_velocity.powi(2) * y_drag_factor;
+    loop {
+        let prev_x = x1;
+        let prev_y = y1;
+        let dx_velocity: f64 = -x_drag_factor * x_velocity.abs() * x_velocity;
+        let dy_velocity: f64 = -y_drag_factor * y_velocity.abs() * y_velocity - GRAVITY;
 
-        x_velocity -= dx_velocity * TIMESTEP;
-        y_velocity -= dy_velocity * TIMESTEP;
+        x_velocity += dx_velocity * TIMESTEP;
+        y_velocity += dy_velocity * TIMESTEP;
 
         x1 += x_velocity * TIMESTEP;
         y1 += y_velocity * TIMESTEP;
-    }
 
-    y1 - y2
+        // More chatgpt edits below
+        // --- Check for crossing y = y2 (goal height) ---
+        if (prev_y - y2) * (y1 - y2) <= 0.0 && prev_y != y1 {
+            let t = (y2 - prev_y) / (y1 - prev_y);
+            let x_hit = prev_x + t * (x1 - prev_x);
+            return x_hit - x2; // horizontal error at goal height
+        }
+
+        // --- Check for ground hit (y <= 0) ---
+        if y1 <= 0.0 {
+            let t = if prev_y != y1 { (0.0 - prev_y) / (y1 - prev_y) } else { 0.0 };
+            let x_hit = prev_x + t * (x1 - prev_x);
+
+            let dx = x_hit - x2;
+            let dy = -y2;
+            return (dx * dx + dy * dy).sqrt(); // distance to goal from ground
+        }
+    }
 }
 
 #[must_use] pub fn integrate(angle: f64, velocity: f64, x1: f64, y1: f64, x2: f64, y2: f64) -> f64 {

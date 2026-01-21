@@ -30,15 +30,13 @@ pub fn solve(
         iterations += 1;
     }
 
-    if a_error.abs() <= TOLERANCE {
-        Some((a, a_error))
-    }
-
-    else if b_error.abs() <= TOLERANCE {
-        Some((b, b_error))
-    }
-
-    else {
+    if (a_error.abs() <= FINAL_TOLERANCE) || (b_error.abs() <= FINAL_TOLERANCE) {
+        if a_error.abs() < b_error.abs() {
+            Some((a, a_error))
+        } else {
+            Some((b, b_error))
+        }
+    } else {
         None
     }
 }
