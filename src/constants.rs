@@ -22,7 +22,7 @@ pub mod simulation {
 	pub const DISTANCE_STEPS: u32 = 1 + ((DISTANCE_MAX - DISTANCE_MIN) / DISTANCE_STEP) as u32;
 
 	pub const VELOCITY_MIN: f64 = 1.0; // The minimum velocity that will be simulated, m/s.
-	pub const VELOCITY_MAX: f64 = 10.0; // The maximum velocity that will be simulated, m/s.
+	pub const VELOCITY_MAX: f64 = 15.0; // The maximum velocity that will be simulated, m/s.
 	pub const VELOCITY_STEP: f64 = 0.1; // The velocity the simulation steps through each simulation, m/s.
 	pub const VELOCITY_STEPS: u32 = 1 + ((VELOCITY_MAX - VELOCITY_MIN) / VELOCITY_STEP) as u32;
 
